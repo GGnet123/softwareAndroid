@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorLoadMore">#BB0578</color>
+    <color name="AcceptRefuseClicked">#94055F</color>
+    <color name="LoginClicked">#410C6F</color>
+    <color name="whiteColor">#fff</color>
+    <color name="blackColor">#2d2d2d</color>
+    <color name="frootviolet">#5A1397</color>
+</resources>

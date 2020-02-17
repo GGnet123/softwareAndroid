@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#2d2d2d"
+    android:paddingTop="16dp"
+    android:paddingBottom="7dp"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_centerInParent="true"
+                android:id="@+id/header"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/order_list"
+                android:textSize="25sp"
+                android:textColor="#BB0578" />
+            <Button
+                android:id="@+id/profile_btn"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:onClick="open_profile"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/user"/>
+            <Button
+                android:id="@+id/log_out_btn"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:onClick="log_out_btn"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/exit_btn"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="3dp"
+            android:background="#6495ED" />
+
+        <ListView
+            android:id="@+id/list"
+            style="@style/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#DCDCDC"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:divider="#A9A9A9"
+            android:dividerHeight="2dp"
+            />
+    </LinearLayout>
+</RelativeLayout>

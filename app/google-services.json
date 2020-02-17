@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "279135328159",
+    "firebase_url": "https://courierservice-77761.firebaseio.com",
+    "project_id": "courierservice-77761",
+    "storage_bucket": "courierservice-77761.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279135328159:android:9d5c06a3e44d48fc438faa",
+        "android_client_info": {
+          "package_name": "froot.courierservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279135328159-g1iuqkjau80g98l4bprpmit9forpgu8i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "froot.courierservice",
+            "certificate_hash": "101efe56698adc1e789861cb8aadbb6d92cd3214"
+          }
+        },
+        {
+          "client_id": "279135328159-9k7b5n1rjk93dmqgve5413ardrs13sk7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4Wm0Xpa22X8Rs0agqjEK2yR3_wJbgHp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279135328159-9k7b5n1rjk93dmqgve5413ardrs13sk7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

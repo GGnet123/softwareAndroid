@@ -1,0 +1,16 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/blackColor</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="listView" parent="android:Widget.ListView">
+        <item name="android:background">#C5BFBF</item>
+        <item name="android:fastScrollEnabled">true</item>
+    </style>
+    <style name="textStyle" parent="android:Widget.TextView">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

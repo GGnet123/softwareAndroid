@@ -1,0 +1,67 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:tools = "http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height = "match_parent" android:paddingLeft= "16dp"
+    android:paddingRight = "16dp"
+    android:paddingTop = "90dp"
+    android:paddingBottom = "16dp" tools:context = ".LoginActivity"
+    android:background="@color/blackColor">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="222dp"
+        android:layout_height="114dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ezshop" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:focusable="true"
+        android:fontFamily="@font/capriola"
+        android:hint="Логин"
+        android:textColorHighlight="#ff7eff15"
+        android:textColorHint="#EB2E83"
+        android:textStyle="bold"
+        android:textColor="@color/whiteColor"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="381dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_alignEnd="@+id/username"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="-2dp"
+        android:ems="10"
+        android:fontFamily="@font/capriola"
+        android:hint="Пароль"
+        android:inputType="textPassword"
+        android:textColorHint="#EB2E83"
+        android:textColorHighlight="#ff7eff15"
+        android:textStyle="bold"
+        android:textColor="@color/whiteColor"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_alignEnd="@+id/username"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="login"
+        android:background="@drawable/loginbtn"
+        android:textColor="@android:color/white"
+        android:text="Войти" />
+</RelativeLayout>

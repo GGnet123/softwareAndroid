@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#DCDCDC">
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:background="@color/blackColor">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+      <Button
+          android:id="@+id/backBtn"
+          android:layout_width="50dp"
+          android:layout_height="40dp"
+          android:layout_marginStart="10dp"
+          android:layout_alignParentStart="true"
+          android:background="@drawable/back_btn">
+      </Button>
+      <TextView
+          android:id="@+id/headerInOrder"
+          style="@style/textStyle"
+          android:layout_centerInParent="true"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:textSize="25sp"
+          android:textColor="#BB0578"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="#6495ED" />
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingStart="5dp">
+
+    <TextView android:id="@+id/name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:paddingTop="10dip"
+        android:paddingEnd="1dip"
+        android:text="Клиент: "/>
+    
+    <TextView android:id="@+id/title_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingEnd="8dip"
+        android:paddingTop="10dip"
+        android:textColor="#9610a1"
+        android:gravity="right"/>
+  </LinearLayout>
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:paddingStart="5dp"
+      android:src="@drawable/dotted_line"
+      android:layerType="software"
+      android:paddingEnd="5dp"/>
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingLeft="5dp">
+
+    <TextView android:id="@+id/address_label"
+        android:layout_width="wrap_content"
+        android:textSize="15sp"
+        android:layout_height="wrap_content"
+        android:paddingEnd="0.9dip"
+        android:text="Адресс: "/>
+
+    <TextView android:id="@+id/description_label"
+        android:layout_width="fill_parent"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#9610a1"
+        android:gravity="right"
+        android:paddingEnd="8dip"/>
+  </LinearLayout>
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:paddingLeft="5dp"
+      android:src="@drawable/dotted_line"
+      android:layerType="software"
+      android:paddingEnd="5dp"/>
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingLeft="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:paddingRight="1dip"
+        android:text="Сумма: "/>
+
+    <TextView android:id="@+id/total_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingEnd="8dip"
+        android:textStyle="bold"
+        android:textColor="#9610a1"
+        android:gravity="right"/>
+  </LinearLayout>
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:paddingStart="5dp"
+      android:paddingEnd="5dp"
+      android:src="@drawable/dotted_line"
+      android:layerType="software" />
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingLeft="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Доставка: "/>
+
+    <TextView android:id="@+id/delivery_price_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingRight="8dip"
+        android:textStyle="bold"
+        android:textColor="#9610a1"
+        android:gravity="right"/>
+  </LinearLayout>
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:paddingStart="5dp"
+      android:src="@drawable/dotted_line"
+      android:layerType="software"
+      android:paddingEnd="5dp"/>
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingLeft="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:paddingRight="1dip"
+        android:text="Сдача с: "/>
+
+    <TextView android:id="@+id/taken_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingRight="8dip"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:textColor="#9610a1" />
+  </LinearLayout>
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:paddingStart="5dp"
+      android:paddingEnd="5dp"
+      android:src="@drawable/dotted_line"
+      android:layerType="software" />
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingLeft="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:paddingRight="1dip"
+        android:text="Статус: "/>
+
+    <TextView android:id="@+id/status_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:paddingRight="8dip"
+        android:textColor="#9610a1" />
+  </LinearLayout>
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="5dp"
+      android:paddingStart="5dp"
+      android:paddingEnd="5dp"
+      android:src="@drawable/dotted_line"
+      android:layerType="software" />
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:orientation="vertical"
+      android:layout_marginTop="8dp"
+      android:layout_gravity="center|bottom"
+      android:layout_weight="1"
+      android:paddingBottom="12dp">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginBottom="55dp"
+        android:layout_marginTop="15dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp">
+      <ListView
+          android:id="@+id/list2"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:background="#C5BFBF"
+          android:divider="#555555"
+          android:clickable="false"
+          android:dividerHeight="1dp" />
+    </ScrollView>
+  </RelativeLayout>
+  <Button
+      android:id="@+id/accept"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/accept_order"
+      android:textColor="#fff"
+      android:background="@drawable/accept_refuse_btn"
+      android:layout_gravity="center_horizontal|center"/>
+  <Button
+      android:id="@+id/refuse"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:textColor="#fff"
+      android:text="@string/refuse"
+      android:background="@drawable/accept_refuse_btn"
+      android:layout_gravity="center_horizontal|center"
+      android:layout_margin="10dp"/>
+</LinearLayout>
