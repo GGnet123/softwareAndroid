@@ -1,20 +1,27 @@
 package froot.courierservice;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import froot.courierservice.retorfit.JSONPlaceHolderApi;
 import froot.courierservice.retorfit.NetworkClient;
+import froot.courierservice.retorfit.PostCode;
 import froot.courierservice.retorfit.PostOrder;
 import froot.courierservice.retorfit.getItems;
 import retrofit2.Call;
@@ -25,6 +32,7 @@ import retrofit2.Retrofit;
 public class SingleMenuItemActivity  extends Activity {
     ArrayAdapter adapter;
     ProgressDialog pDialog;
+    private String m_Text = "";
     static final String KEY_ORDERS_ID = "OrdersId";
     static final String KEY_ORDERS_NAME = "Name";
     static final String KEY_ORDERS_ADDRESS = "Address";
@@ -80,7 +88,7 @@ public class SingleMenuItemActivity  extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_list_item);
-
+        Log.d("wtf", "wtf");
         instance = this;
 
         Intent in = getIntent();
@@ -130,14 +138,22 @@ public class SingleMenuItemActivity  extends Activity {
             btnRefuse.setVisibility(View.GONE);
         }
 
-        if (isBusy==0 && !runner.equals(username)){
-            btnAccept.setVisibility(View.GONE);
-            btnRefuse.setVisibility(View.GONE);
-        }
-
         if (StatusId==3 || StatusId==4){
             btnAccept.setVisibility(View.GONE);
             btnRefuse.setVisibility(View.GONE);
+        }
+        if (StatusId==1 && isBusy==0){
+            btnAccept.setVisibility(View.VISIBLE);
+            btnRefuse.setVisibility(View.VISIBLE);
+        }
+        if (StatusId==2 && !runner.equals(username) ){
+            btnAccept.setVisibility(View.GONE);
+            btnRefuse.setVisibility(View.GONE);
+        }
+        if (StatusId==2 && runner.equals(username) ){
+
+            btnAccept.setVisibility(View.VISIBLE);
+            btnRefuse.setVisibility(View.VISIBLE);
         }
 
         ///listview
@@ -247,11 +263,57 @@ public class SingleMenuItemActivity  extends Activity {
             pDialog.setCancelable(false);
             pDialog.show();
         }
+        public void verify(){
+            final Button btnAccept = (Button) findViewById(R.id.accept);
+            final Button btnRefuse = (Button) findViewById(R.id.refuse);
+
+            Log.d("verify", "here");
+            AlertDialog.Builder builder = new AlertDialog.Builder(SingleMenuItemActivity.this);
+            builder.setTitle("Verification code");
+
+            final EditText input = new EditText(SingleMenuItemActivity.this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+            builder.setCancelable(false)
+                   .setPositiveButton("verify", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    m_Text = input.getText().toString();
+                    PostCode post = new PostCode(m_Text);
+                    Call<PostCode> call = jp.postCode(token, post);
+                    call.enqueue(new Callback<PostCode>() {
+                        @Override
+                        public void onResponse(Call<PostCode> call, Response<PostCode> response) {
+                            if (response.isSuccessful()){
+                                PostCode res = response.body();
+                                if (res.getSuccess()){
+                                    btnAccept.setVisibility(View.GONE);
+                                    btnRefuse.setVisibility(View.GONE);
+                                    lblStatus.setText("Доставлено");
+                                } else {
+                                    Toast.makeText(SingleMenuItemActivity.this, "Wrong verification code!", Toast.LENGTH_SHORT).show();
+                                    verify();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<PostCode> call, Throwable t) {
+
+                        }
+                    });
+                }
+            });
+
+            builder.show();
+        }
         protected Void doInBackground(Void... unused) {
             final Button btnAccept = (Button) findViewById(R.id.accept);
             final Button btnRefuse = (Button) findViewById(R.id.refuse);
             runOnUiThread(new Runnable() {
                 public void run(){
+                    Log.d("vvvv",""+btnStatus);
                     btnClicked = true;
                     if (!btnStatus){
                         PostOrder post = new PostOrder(fId,2);
@@ -274,9 +336,7 @@ public class SingleMenuItemActivity  extends Activity {
                         call.enqueue(new Callback<PostOrder>() {
                             @Override
                             public void onResponse(Call<PostOrder> call, Response<PostOrder> response) {
-                                btnAccept.setVisibility(View.GONE);
-                                btnRefuse.setVisibility(View.GONE);
-                                lblStatus.setText("Доставлено");
+                                verify();
                                 pDialog.dismiss();
                             }
                             @Override
@@ -300,7 +360,51 @@ public class SingleMenuItemActivity  extends Activity {
             pDialog.setCancelable(false);
             pDialog.show();
         }
+        public void verify(){
+            final Button btnAccept = (Button) findViewById(R.id.accept);
+            final Button btnRefuse = (Button) findViewById(R.id.refuse);
 
+            Log.d("verify", "here");
+            AlertDialog.Builder builder = new AlertDialog.Builder(SingleMenuItemActivity.this);
+            builder.setTitle("Verification code");
+
+            final EditText input = new EditText(SingleMenuItemActivity.this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+            builder.setCancelable(false)
+                    .setPositiveButton("verify", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            m_Text = input.getText().toString();
+                            PostCode post = new PostCode(m_Text);
+                            Call<PostCode> call = jp.postCode(token, post);
+                            call.enqueue(new Callback<PostCode>() {
+                                @Override
+                                public void onResponse(Call<PostCode> call, Response<PostCode> response) {
+                                    if (response.isSuccessful()){
+                                        PostCode res = response.body();
+                                        if (res.getSuccess()){
+                                            btnAccept.setVisibility(View.GONE);
+                                            btnRefuse.setVisibility(View.GONE);
+                                            lblStatus.setText("Доставлено");
+                                        } else {
+                                            Toast.makeText(SingleMenuItemActivity.this, "Wrong verification code!", Toast.LENGTH_SHORT).show();
+                                            verify();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<PostCode> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    });
+
+            builder.show();
+        }
         @Override
         protected Void doInBackground(Void... voids) {
             final Button btnAccept = (Button) findViewById(R.id.accept);
@@ -314,9 +418,7 @@ public class SingleMenuItemActivity  extends Activity {
                     call.enqueue(new Callback<PostOrder>() {
                         @Override
                         public void onResponse(Call<PostOrder> call, Response<PostOrder> response) {
-                            btnAccept.setVisibility(View.GONE);
-                            btnRefuse.setVisibility(View.GONE);
-                            lblStatus.setText("Доставлено");
+                            verify();
                             pDialog.dismiss();
                         }
                         @Override

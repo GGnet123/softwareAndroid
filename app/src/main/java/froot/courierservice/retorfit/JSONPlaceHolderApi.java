@@ -20,6 +20,11 @@ public interface JSONPlaceHolderApi {
             @Header("x-auth-token") String token
     );
 
+    @POST("runners/verify-order")
+    public Call<PostCode> postCode(
+            @Header("x-auth-token") String token,
+            @Body PostCode code
+    );
     @GET("runners/orders")
     public Call<getJson> getOrders(
             @Header("x-auth-token") String token,

@@ -1,16 +1,23 @@
 package froot.courierservice;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 
 import java.lang.reflect.Array;
@@ -20,6 +27,7 @@ import java.util.List;
 
 import froot.courierservice.retorfit.JSONPlaceHolderApi;
 import froot.courierservice.retorfit.NetworkClient;
+import froot.courierservice.retorfit.PostCode;
 import froot.courierservice.retorfit.PostOrder;
 import froot.courierservice.retorfit.getItems;
 import froot.courierservice.retorfit.getOrders;
@@ -35,6 +43,7 @@ public class ProfileActivity extends Activity {
     ProgressDialog pDialog;
     String token;
     int id;
+    private String m_Text = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +114,54 @@ public class ProfileActivity extends Activity {
 
     }
     public class doneBtn extends AsyncTask<Void,Void,Void> {
+
+        public void verify(){
+            Button btnAccept = (Button) findViewById(R.id.profile_done);
+            Button btnRefuse = (Button) findViewById(R.id.profile_refuse);
+
+            Log.d("verify", "here");
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+            builder.setTitle("Verification code");
+
+            final EditText input = new EditText(ProfileActivity.this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+            builder.setCancelable(false)
+                    .setPositiveButton("verify", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            m_Text = input.getText().toString();
+                            PostCode post = new PostCode(m_Text);
+                            Retrofit retrofit = NetworkClient.getRetrofitClient();
+                            JSONPlaceHolderApi jp = retrofit.create(JSONPlaceHolderApi.class);
+                            Call<PostCode> call = jp.postCode(token, post);
+                            call.enqueue(new Callback<PostCode>() {
+                                @Override
+                                public void onResponse(Call<PostCode> call, Response<PostCode> response) {
+                                    if (response.isSuccessful()){
+                                        PostCode res = response.body();
+                                        if (res.getSuccess()){
+                                           btnAccept.setVisibility(GONE);
+                                           btnRefuse.setVisibility(GONE);
+                                           lblStatus.setText("Доставлено");
+                                        } else {
+                                            Toast.makeText(ProfileActivity.this, "Wrong verification code!", Toast.LENGTH_SHORT).show();
+                                            verify();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<PostCode> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    });
+
+            builder.show();
+        }
         @Override
         protected void onPostExecute(Void aVoid) {
             pDialog = new ProgressDialog(
@@ -129,9 +186,8 @@ public class ProfileActivity extends Activity {
                     call.enqueue(new Callback<PostOrder>() {
                         @Override
                         public void onResponse(Call<PostOrder> call, Response<PostOrder> response) {
-                            btnAccept.setVisibility(GONE);
-                            btnRefuse.setVisibility(GONE);
-                            lblStatus.setText("Доставлено");
+                            verify();
+                            Log.d("sometag", "here");
                             pDialog.dismiss();
                         }
                         @Override

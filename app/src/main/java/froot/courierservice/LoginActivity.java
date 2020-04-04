@@ -72,6 +72,33 @@ public class LoginActivity extends Activity {
             pDialog.setCancelable(false);
             pDialog.show();
         }
+        public void deviceToken(String t){
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                return;
+                            }
+                            // Get new Instance ID token
+                            String token = task.getResult().getToken();
+                            PostToken deviceToken = new PostToken(token);
+                            Retrofit retrofit = NetworkClient.getRetrofitClient();
+                            JSONPlaceHolderApi jp = retrofit.create(JSONPlaceHolderApi.class);
+                            Call<PostToken> call = jp.postDeviceToken(t, deviceToken);
+                            Log.i("devicetoken", t+" /// "+deviceToken);
+                            call.enqueue(new Callback<PostToken>() {
+                                @Override
+                                public void onResponse(Call<PostToken> call, Response<PostToken> response) {
+                                    Log.i("response", response.message());
+                                }
+                                @Override
+                                public void onFailure(Call<PostToken> call, Throwable t) { }
+                            });
+                        }
+                    });
+        }
         public Void doInBackground(Void...unused){
             if (userDB.getUserDao().getUsers().isEmpty()){
                 pDialog.cancel();
@@ -94,7 +121,7 @@ public class LoginActivity extends Activity {
                     if (response.isSuccessful()) {
                         Post postResponce = response.body();
                         token = postResponce.getToken();
-
+                        deviceToken(token);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("token", token);
                         startActivity(intent);

@@ -12,14 +12,18 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.Settings;
 import android.text.GetChars;
 import android.util.Log;
@@ -32,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import froot.courierservice.LocationService.LocationService;
 import froot.courierservice.db.UserDb;
@@ -79,8 +84,7 @@ public class MainActivity extends Activity {
     int current_page = 1;
     Button btnLoadMore;
     static MainActivity instance;
-    LocationManager lm;
-    Context context;
+    LocationService gpsService;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,10 +100,12 @@ public class MainActivity extends Activity {
         UserToken = intent.getStringExtra("token");
         instance = this;
 
-        Intent backService = new Intent(this.getApplication(), LocationService.class);
-        backService.putExtra("token",UserToken);
-        this.getApplication().startService(backService);
-
+        if (checkLocationPermission()){
+            Intent backService = new Intent(this.getApplication(), LocationService.class);
+            backService.putExtra("token",UserToken);
+            this.getApplication().startService(backService);
+            this.getApplication().bindService(intent,serviceConnection, Context.BIND_AUTO_CREATE);
+        };
 
         Retrofit retrofit = NetworkClient.getRetrofitClient();
         JSONPlaceHolderApi jp = retrofit.create(JSONPlaceHolderApi.class);
@@ -120,6 +126,98 @@ public class MainActivity extends Activity {
 
         Execute();
     }
+
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(this)
+                        .setTitle("Включите геоданные")
+                        .setMessage("Пожалуйста, дайте разрешение на передачу геоданных")
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(MainActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        //Request location updates:
+                        Intent intent = getIntent();
+                        Intent backService = new Intent(this.getApplication(), LocationService.class);
+                        backService.putExtra("token",UserToken);
+                        this.getApplication().startService(backService);
+                        this.getApplication().bindService(intent,serviceConnection, Context.BIND_AUTO_CREATE);
+                    }
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+
+                }
+                return;
+            }
+
+        }
+    }
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            String name = className.getClassName();
+            if (name.endsWith("LocationService")) {
+                gpsService = ((LocationService.LocationServiceBinder) service).getService();
+            }
+        }
+        public void onServiceDisconnected(ComponentName className) {
+            if (className.getClassName().equals("BackgroundService")) {
+                gpsService = null;
+            }
+        }
+    };
 
     public void log_out_btn(View view){
         new logOut().execute();
