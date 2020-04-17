@@ -5,8 +5,11 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorLoadMore">#BB0578</color>
     <color name="AcceptRefuseClicked">#94055F</color>
-    <color name="LoginClicked">#410C6F</color>
+    <color name="LoginClicked">#974001</color>
+<!--    <color name="LoginClicked">#410C6F</color>-->
     <color name="whiteColor">#fff</color>
     <color name="blackColor">#2d2d2d</color>
-    <color name="frootviolet">#5A1397</color>
+    <color name="testColor">#ECBD55</color>
+    <color name="frootviolet">#BE4D2E</color>
+<!--    <color name="frootviolet">#5A1397</color>-->
 </resources>

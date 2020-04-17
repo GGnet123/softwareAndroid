@@ -5,14 +5,14 @@
     android:paddingRight = "16dp"
     android:paddingTop = "90dp"
     android:paddingBottom = "16dp" tools:context = ".LoginActivity"
-    android:background="@color/blackColor">
+    android:background="@color/testColor">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="222dp"
-        android:layout_height="114dp"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/ezshop" />
 
     <EditText
