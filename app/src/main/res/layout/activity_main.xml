@@ -4,7 +4,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="#2d2d2d"
+    android:background="#B0C4DE"
     android:paddingTop="16dp"
     android:paddingBottom="7dp"
     tools:context=".MainActivity">
@@ -25,21 +25,32 @@
                 android:layout_marginBottom="10dp"
                 android:text="@string/order_list"
                 android:textSize="25sp"
-                android:textColor="#BB0578" />
+                android:textColor="#F8F6F6" />
             <Button
                 android:id="@+id/profile_btn"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="50dp"
                 android:onClick="open_profile"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/user"/>
             <Button
+                android:id="@+id/stores_btn"
+                android:layout_width="45dp"
+                android:layout_height="50dp"
+                android:onClick="open_stores"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/profile_btn"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/store"/>
+            <Button
                 android:id="@+id/log_out_btn"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="50dp"
                 android:onClick="log_out_btn"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/exit_btn"/>
         </RelativeLayout>
 
@@ -53,7 +64,7 @@
             style="@style/listView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#DCDCDC"
+            android:background="@color/whiteColor"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:divider="#A9A9A9"

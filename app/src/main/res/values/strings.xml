@@ -2,6 +2,6 @@
     <string name="app_name">CourierService</string>
     <string name="order_list">Лист заказов</string>
     <string name="btn">Загрузить еще</string>
-    <string color="#000000" name="accept_order">Принять заказ</string>
+    <string name="accept_order" color="#000000">Принять заказ</string>
     <string name="refuse">Отменить заказ</string>
 </resources>

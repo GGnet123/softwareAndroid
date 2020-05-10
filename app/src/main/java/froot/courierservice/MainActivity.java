@@ -226,6 +226,10 @@ public class MainActivity extends Activity {
     public void open_profile(View view){
         new profile().execute();
     }
+    public void open_stores(View view){
+        Intent in = new Intent(MainActivity.this, StoresActivity.class);
+        startActivity(in);
+    }
 
     public void askPermission(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);

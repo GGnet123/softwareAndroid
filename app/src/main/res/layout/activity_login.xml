@@ -5,7 +5,7 @@
     android:paddingRight = "16dp"
     android:paddingTop = "90dp"
     android:paddingBottom = "16dp" tools:context = ".LoginActivity"
-    android:background="@color/testColor">
+    android:background="#FAE7E7">
 
     <ImageView
         android:id="@+id/imageView"
@@ -30,7 +30,7 @@
         android:textColorHighlight="#ff7eff15"
         android:textColorHint="#EB2E83"
         android:textStyle="bold"
-        android:textColor="@color/whiteColor"/>
+        android:textColor="#881A1A"/>
 
     <EditText
         android:id="@+id/password"
@@ -49,7 +49,7 @@
         android:textColorHint="#EB2E83"
         android:textColorHighlight="#ff7eff15"
         android:textStyle="bold"
-        android:textColor="@color/whiteColor"/>
+        android:textColor="#881A1A"/>
 
     <Button
         android:id="@+id/button"

@@ -3,8 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorLoadMore">#BB0578</color>
-    <color name="AcceptRefuseClicked">#94055F</color>
+    <color name="colorLoadMore">#FFB6C1</color>
+    <color name="AcceptRefuseClicked">#FA7F92</color>
     <color name="LoginClicked">#974001</color>
 <!--    <color name="LoginClicked">#410C6F</color>-->
     <color name="whiteColor">#fff</color>

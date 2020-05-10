@@ -4,13 +4,13 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="#DCDCDC">
+  android:background="@color/whiteColor">
 
   <LinearLayout
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:background="@color/blackColor">
+      android:background="@color/whiteColor">
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -30,7 +30,7 @@
           android:layout_height="wrap_content"
           android:layout_marginBottom="10dp"
           android:textSize="25sp"
-          android:textColor="#BB0578"/>
+          android:textColor="#1B0808"/>
     </RelativeLayout>
     <View
         android:layout_width="fill_parent"
@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:paddingTop="10dip"
+        android:layout_marginBottom="5dp"
         android:paddingEnd="1dip"
         android:text="Клиент: "/>
     
@@ -59,7 +60,7 @@
         android:textStyle="bold"
         android:paddingEnd="8dip"
         android:paddingTop="10dip"
-        android:textColor="#9610a1"
+        android:textColor="#363434"
         android:gravity="right"/>
   </LinearLayout>
 
@@ -78,6 +79,7 @@
       android:paddingLeft="5dp">
 
     <TextView android:id="@+id/address_label"
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:textSize="15sp"
         android:layout_height="wrap_content"
@@ -89,7 +91,7 @@
         android:textSize="18sp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textColor="#9610a1"
+        android:textColor="#363434"
         android:gravity="right"
         android:paddingEnd="8dip"/>
   </LinearLayout>
@@ -109,6 +111,7 @@
       android:paddingLeft="5dp">
 
     <TextView
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -121,7 +124,7 @@
         android:textSize="18sp"
         android:paddingEnd="8dip"
         android:textStyle="bold"
-        android:textColor="#9610a1"
+        android:textColor="#363434"
         android:gravity="right"/>
   </LinearLayout>
 
@@ -140,6 +143,7 @@
       android:paddingLeft="5dp">
 
     <TextView
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -151,7 +155,7 @@
         android:textSize="18sp"
         android:paddingRight="8dip"
         android:textStyle="bold"
-        android:textColor="#9610a1"
+        android:textColor="#363434"
         android:gravity="right"/>
   </LinearLayout>
 
@@ -170,6 +174,7 @@
       android:paddingLeft="5dp">
 
     <TextView
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -183,7 +188,7 @@
         android:paddingRight="8dip"
         android:textStyle="bold"
         android:gravity="right"
-        android:textColor="#9610a1" />
+        android:textColor="#363434" />
   </LinearLayout>
 
   <ImageView
@@ -201,6 +206,7 @@
       android:paddingLeft="5dp">
 
     <TextView
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -214,7 +220,7 @@
         android:textStyle="bold"
         android:gravity="right"
         android:paddingRight="8dip"
-        android:textColor="#9610a1" />
+        android:textColor="#363434" />
   </LinearLayout>
 
   <ImageView
@@ -245,7 +251,7 @@
           android:id="@+id/list2"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
-          android:background="#C5BFBF"
+          android:background="#D3D3D3"
           android:divider="#555555"
           android:clickable="false"
           android:dividerHeight="1dp" />
